@@ -11,7 +11,7 @@ def connect_db():
         return mysql.connector.connect(
             host='localhost',
             user='root',
-            password='norassoba'
+            password='password'
         )
     except mysql.connector.Error as err:
         print(f"Error connecting to MySQL server: {err}")
