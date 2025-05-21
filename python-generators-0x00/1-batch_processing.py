@@ -36,5 +36,5 @@ def batch_processing(batch_size):
                 'age': user[3]
             }
             if user_dict['age'] > 25:
-                print(user_dict)
+                yield user_dict
 
