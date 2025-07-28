@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Unit tests for utils module functions: 
-    access_nested_map, get_json, and memoize.
+"""Unit tests for utils module functions:
+access_nested_map, get_json, and memoize.
 """
 
 import unittest
@@ -48,7 +48,9 @@ class TestGetJson(unittest.TestCase):
 
             result = get_json(test_url)
 
-            mock_get.assert_called_once_with(test_url)
+            mock_get.assert_called_once_with(
+                test_url
+            )
             self.assertEqual(result, test_payload)
 
 
