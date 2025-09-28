@@ -70,6 +70,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'messaging_app.wsgi.application'
 
+# Rest Framework
+REST_FRAMEWORK = {
+    # Require authentication globally
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
