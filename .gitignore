@@ -1,0 +1,7 @@
+# Ignore binaries and system files
+minikube-linux-amd64
+*.pyc
+__pycache__/
+*.db
+*.sqlite3
+.env
