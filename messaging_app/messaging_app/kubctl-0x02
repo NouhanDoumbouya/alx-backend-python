@@ -1,0 +1,19 @@
+#!/bin/bash
+# Script for Blue-Green Deployment of Django app
+
+set -e
+
+echo "🔹 Deploying BLUE version..."
+kubectl apply -f messaging_app/blue_deployment.yaml
+
+echo "🔹 Deploying GREEN version..."
+kubectl apply -f messaging_app/green_deployment.yaml
+
+echo "✅ Both BLUE and GREEN deployments applied."
+
+echo "🔍 Checking pods..."
+kubectl get pods
+
+echo "🔍 Checking logs for GREEN deployment..."
+GREEN_POD=$(kubectl get pods -l app=messaging-app,version=green -o jsonpath="{.items[0].metadata.name}")
+kubectl logs $GREEN_POD
