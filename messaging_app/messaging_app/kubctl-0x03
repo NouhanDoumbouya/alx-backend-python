@@ -1,0 +1,24 @@
+#!/bin/bash
+# Script to perform rolling update on Django app
+
+set -e
+
+DEPLOYMENT_NAME=django-messaging-app
+
+echo "🔹 Applying updated deployment for rolling update..."
+kubectl apply -f messaging_app/blue_deployment.yaml
+
+echo "🔹 Monitoring rollout progress..."
+kubectl rollout status deployment/$DEPLOYMENT_NAME
+
+echo "🔹 Testing for downtime..."
+# Continuously send requests to the app (assuming port-forwarding is active)
+echo "Press Ctrl+C to stop testing."
+while true; do
+  curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" http://localhost:8000/
+  sleep 1
+done
+
+# Verify current pods
+echo "🔹 Current pods after rolling update:"
+kubectl get pods
