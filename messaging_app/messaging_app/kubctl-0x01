@@ -1,0 +1,20 @@
+#!/bin/bash
+# Script to scale the Django app deployment and monitor performance
+
+# Exit on error
+set -e
+
+echo "🔹 Scaling Django Messaging App to 3 replicas..."
+kubectl scale deployment django-messaging-app --replicas=3
+
+echo "✅ Scaled successfully. Checking running pods..."
+kubectl get pods -o wide
+
+echo "📊 Monitoring resource usage (CPU/Memory)..."
+kubectl top pods || echo "⚠️ 'metrics-server' may not be installed. Run: minikube addons enable metrics-server"
+
+# Optional load testing (requires wrk)
+echo "🚀 Performing load test using wrk..."
+echo "➡️ Run: kubectl port-forward service/messaging-app-service 8000:8000 &"
+echo "➡️ Then in another terminal, execute:"
+echo "    wrk -t4 -c100 -d30s http://localhost:8000/"
